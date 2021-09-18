@@ -1,31 +1,82 @@
 @mixin font($font_name, $file_name, $weight, $style) {
     @font-face {
-    font-family: $font_name;
-    font-display: swap;
-    src: url("../fonts/#{$file_name}.woff") format("woff"), url("../fonts/#{$file_name}.woff2") format("woff2");
-    font-weight: #{$weight};
-    font-style: #{$style};
+        font-family: $font_name;
+        font-display: swap;
+        src: url("../fonts/#{$file_name}.woff") format("woff"),
+        url("../fonts/#{$file_name}.woff2") format("woff2");
+        font-weight: #{$weight};
+        font-style: #{$style};
     }
 }
+
+// variables
+
+// Changing the theme colors
+$primary: #6149CF;
+$secondary: #FF8B00;
+$success: #65ff9f;
+$info: #7164ff;
+$warning: #ff9f65;
+$danger: #ff457b;
+$dark: #363636;
+
 
 @import "node_modules/bootstrap/scss/bootstrap";
+@import "fonts";
 
-
-body {
-    font-size: 20px;
-    display: flex;
-}
-
-span {
-    font-size: 20px;
-    @media screen and (max-width: 767px) {
-        font-size: 15px;
+// header 
+header {
+    button.navbar-toggler {
+        background-color: transparent;
+        background-image: none;
+        border: 1px solid transparent;
     }
-}
 
-div {
-    font-size: 30px;
-    @media screen and (max-width: 767px) {
-        font-size: 20px;
+    .navbar-collapse {
+        justify-content: right;
+
+        .navbar-nav {
+            .nav-link {
+                line-height: 18px;
+            }
+
+            a {
+                color: #ffffff !important;
+                font-size: 14px;
+                font-weight: 700;
+                text-transform: uppercase;
+            }
+        }
+
+        .nav-link.active {
+            border-bottom: 3px solid $secondary;
+        }
+
+        .nav-link:hover {
+            border-bottom: 3px solid $secondary;
+        }
+
+        @media screen and (max-width: 992px) {
+            a.nav-link {
+                text-align: center;
+                padding: 1.5em;
+            }
+
+            a.nav-link:hover {
+                border-bottom: none;
+            }
+
+            a.nav-link:active {
+                color: $secondary;
+            }
+
+            a.nav-link:visited {
+                color: $success;
+            }
+
+            a.nav-link.active {
+                border-bottom: none;
+            }
+        }
     }
 }

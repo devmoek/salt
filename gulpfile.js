@@ -14,7 +14,7 @@ let path = {
     html: [source_folder + "/*.html", "!" + source_folder + "/_*.html"],
     css: source_folder + "/scss/style.scss",
     js: source_folder + "/js/script.js",
-    img: source_folder + "/img/**/*.{png|jpg|gif|ico|svg|webp}",
+    img: source_folder + "/img/**/*.{jpg,png,svg,gif,ico,webp}",
     fonts: source_folder + "/fonts/*.ttf",
   },
 
@@ -22,7 +22,7 @@ let path = {
     html: source_folder + "/**/*.html",
     css: source_folder + "/scss/**/*.scss",
     js: source_folder + "/js/**/*.js",
-    img: source_folder + "/img/**/*.{jpg, png, svg, gif, ico, webp}"
+    img: source_folder + "/img/**/*.{jpg,png,svg,gif,ico,webp}"
   },
   clean: "./" + project_folder + "/"
 }
@@ -106,8 +106,6 @@ function js() {
 // images
 function images() {
   return src(path.src.img)
-    .pipe(dest(path.build.img))
-    .pipe(dest(path.src.img))
     .pipe(
       imagemin({
         progressive: true,
@@ -115,13 +113,14 @@ function images() {
           removeViewBox: false
         }],
         interlaced: true,
-        optimizationLevel: 3 // 0 to 7
+        optimizationLevel: 4 // 0 to 7
       })
     )
     .pipe(dest(path.build.img))
     .pipe(browsersync.stream())
 }
 
+// font transform from otf to ttf 
 gulp.task('otf2ttf', function () {
   return src([source_folder + '/fonts/*.otf'])
     .pipe(fonter({
@@ -156,7 +155,7 @@ function clean(params) {
   return del(path.clean);
 }
 
-let build = gulp.series(clean, gulp.parallel(js, css, html, images));
+let build = gulp.series(clean, html,  gulp.parallel(js, css, images));
 let watch = gulp.parallel(build, watchFiles, browserSync);
 
 // exports
