@@ -13049,6 +13049,7 @@ header .navbar-collapse .nav-link:hover {
   }
 
   header .navbar-collapse a.nav-link:hover {
+    color: #FF8B00 !important;
     border-bottom: none;
   }
 

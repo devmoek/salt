@@ -63,6 +63,7 @@ header {
             }
 
             a.nav-link:hover {
+                color: $secondary !important;
                 border-bottom: none;
             }
 
